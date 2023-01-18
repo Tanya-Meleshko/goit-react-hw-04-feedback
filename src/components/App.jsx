@@ -33,7 +33,7 @@ export const App = () => {
         padding: 30,
       }}
     >
-      <Section title="Please leave feedback">
+      <Section title="Please, leave feedback">
         <FeedbackButtons
           feedbackButtons={Object.keys(feedbackNames)}
           onLeaveFeedback={onAddFeedback}
