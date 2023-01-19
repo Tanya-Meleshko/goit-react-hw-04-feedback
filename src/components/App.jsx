@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import FeedbackButtons from './FeedbackButtons/FeedbackButtons';
 import Section from './Section/Section';
 import Statistics from './Statistics/Statistics';
+import Notification from 'components/Notification/Notification';
 
 export const App = () => {
   const [good, setGood] = useState(0);
@@ -9,6 +10,14 @@ export const App = () => {
   const [bad, setBad] = useState(0);
 
   const feedbackNames = { good, neutral, bad };
+
+  const totalFeedbacks = () => {
+    let total = 0;
+    Object.values(feedbackNames).forEach(element => {
+      total += element;
+    });
+    return total;
+  };
 
   const onAddFeedback = event => {
     switch (event.target.textContent) {
@@ -41,7 +50,11 @@ export const App = () => {
       </Section>
 
       <Section title="Statistics">
-        <Statistics state={feedbackNames} />
+        {totalFeedbacks() > 0 ? (
+          <Statistics state={feedbackNames} total={totalFeedbacks()} />
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
       </Section>
     </div>
   );
